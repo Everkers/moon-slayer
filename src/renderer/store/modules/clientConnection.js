@@ -17,6 +17,11 @@ const actions = {
   SET_STATUS({ getters, state }, input) {
     request(getters.GET_REQUEST_DATA, 'PUT', JSON.stringify({ statusMessage: input }), state.endpoints.status);
   },
+  async SET_BACKGROUND({ getters, state }, input) {
+    console.log(getters.GET_REQUEST_DATA);
+    const res = await request(getters.GET_REQUEST_DATA, 'POST', JSON.stringify({ key: 'backgroundSkinId', value: input }), state.endpoints.profile);
+    console.log(res);
+  },
 };
 const mutations = {
 
