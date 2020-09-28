@@ -7,6 +7,9 @@
       v-model="status"
       type="text"
     >
+    <router-link to="/background">
+      champions
+    </router-link>
   </div>
 </template>
 
@@ -24,7 +27,9 @@ export default {
     status: null,
   }),
   mounted() {
+    console.log('test');
     connector.on('connect', (data) => {
+      console.log(data);
       // SET CLIENT DATA TO THE STATE
       this.set_connector_data(data);
     });

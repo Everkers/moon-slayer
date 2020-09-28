@@ -1,8 +1,5 @@
 <template>
   <div class="champion-1">
-    <router-link to="/">
-      back
-    </router-link>
     <div class="skins">
       <div
         v-for="(skin , index) in CHAMPION_SKINS_STATE"

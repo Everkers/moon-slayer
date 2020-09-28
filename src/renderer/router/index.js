@@ -8,9 +8,9 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/status',
+      path: '/',
       name: 'landing-page',
-      component: require('@/components/LandingPage'),
+      component: require('@/components/LandingPage').default,
     },
     {
       path: '/champion',
@@ -18,9 +18,14 @@ export default new Router({
       component: require('@/components/champion').default,
     },
     {
-      path: '/',
+      path: '/background',
       name: 'background',
       component: require('@/components/background').default,
+    },
+    {
+      path: '/ranked',
+      name: 'ranked',
+      component: require('@/components/ranked').default,
     },
     {
       path: '*',
