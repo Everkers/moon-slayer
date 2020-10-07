@@ -8,9 +8,14 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/land',
       name: 'landing-page',
       component: require('@/components/LandingPage').default,
+    },
+    {
+      path: '/',
+      name: 'Main',
+      component: require('@/components/main').default,
     },
     {
       path: '/champion',

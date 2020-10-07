@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
-const { request } = require('../../functions');
+import { SnackbarProgrammatic } from 'buefy';
+
+import { request } from '../../functions';
 
 const state = {
   status: null,
@@ -20,8 +22,13 @@ const actions = {
   SET_STATUS({ getters, state }, input) {
     request(getters.GET_REQUEST_DATA, 'PUT', JSON.stringify({ statusMessage: input }), state.endpoints.status);
   },
-  SET_BACKGROUND({ getters, state }, input) {
-    request(getters.GET_REQUEST_DATA, 'POST', JSON.stringify({ key: 'backgroundSkinId', value: input }), state.endpoints.profile);
+  async SET_BACKGROUND({ getters, state }, data) {
+    try {
+      await request(getters.GET_REQUEST_DATA, 'POST', JSON.stringify({ key: 'backgroundSkinId', value: data.id }), state.endpoints.profile);
+      SnackbarProgrammatic.open(`${data.name} splash has been set to your profile wallpaper`);
+    } catch (err) {
+      SnackbarProgrammatic.open(err.message);
+    }
   },
 };
 const mutations = {

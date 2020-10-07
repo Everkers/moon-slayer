@@ -1,3 +1,4 @@
-const request = require('./request');
+const { LCUrequest: request } = require('./request');
 
-module.exports = { request };
+// eslint-disable-next-line import/prefer-default-export
+export { request };
