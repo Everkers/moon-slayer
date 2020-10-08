@@ -16,11 +16,24 @@ const state = {
   },
 };
 const actions = {
-  SET_RANK_STATUS({ getters, state }, input) {
-    request(getters.GET_REQUEST_DATA, 'PUT', JSON.stringify(input), state.endpoints.status);
+  async GET_WALLPAPER({ getters, state }) {
+    await request(getters.GET_REQUEST_DATA, 'GET', '', state.endpoints.profile);
   },
-  SET_STATUS({ getters, state }, input) {
-    request(getters.GET_REQUEST_DATA, 'PUT', JSON.stringify({ statusMessage: input }), state.endpoints.status);
+  SET_RANK_STATUS({ getters, state }, input) {
+    try {
+      request(getters.GET_REQUEST_DATA, 'PUT', JSON.stringify(input), state.endpoints.status);
+      SnackbarProgrammatic.open('Rank has been changed');
+    } catch (err) {
+      SnackbarProgrammatic.open(err.message);
+    }
+  },
+  async SET_STATUS({ getters, state }, input) {
+    try {
+      await request(getters.GET_REQUEST_DATA, 'PUT', JSON.stringify({ statusMessage: input }), state.endpoints.status);
+      SnackbarProgrammatic.open('Status has been changed');
+    } catch (err) {
+      SnackbarProgrammatic.open(err.message);
+    }
   },
   async SET_BACKGROUND({ getters, state }, data) {
     try {

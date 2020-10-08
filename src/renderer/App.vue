@@ -36,9 +36,10 @@ export default {
       // SET CLIENT DATA TO THE STATE
       this.set_connector_data(data);
     });
+    this.GET_WALLPAPER();
   },
   methods: {
-    ...mapActions(['set_connector_data', 'SET_STATUS']),
+    ...mapActions(['set_connector_data', 'SET_STATUS', 'GET_WALLPAPER']),
   },
 };
 </script>

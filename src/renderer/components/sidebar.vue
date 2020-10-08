@@ -18,11 +18,16 @@
         </router-link>
       </b-navbar-item>
       <b-navbar-dropdown label="Profile">
-        <b-navbar-item href="#">
+        <b-navbar-item
+          href="#"
+          @click="statusChange()"
+        >
           Status
         </b-navbar-item>
         <b-navbar-item href="#">
-          Rank
+          <router-link to="ranked">
+            Rank
+          </router-link>
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
@@ -43,8 +48,24 @@
 </template>
 
 <script>
-export default {
+import { mapActions } from 'vuex';
 
+export default {
+  methods: {
+    ...mapActions(['SET_STATUS']),
+    statusChange() {
+      this.$buefy.dialog.prompt({
+        message: 'Type status here',
+        inputAttrs: {
+          placeholder: 'https://github.com/Everkers/moon-slayer',
+        },
+        trapFocus: true,
+        onConfirm: (value) => {
+          this.SET_STATUS(value);
+        },
+      });
+    },
+  },
 };
 </script>
 

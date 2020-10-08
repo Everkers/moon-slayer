@@ -15,7 +15,8 @@ async function LCUrequest(reqData, method, body, endpoint) {
       url: `${reqData.url}${endpoint}`,
     };
 
-    request(options, (err) => {
+    request(options, (err, res) => {
+      console.log(res);
       if (err) reject(new Error('An error occurred while making the requested connection'));
       else {
         resolve(true);
