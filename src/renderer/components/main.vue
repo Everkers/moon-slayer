@@ -2,32 +2,46 @@
   <div class="main">
     <div class="summoner-name">
       <div class="server has-background-primary">
-        Euw Server
+        {{ GET_PROFILE_DATA.gameTag }}
       </div>
       <h1 class="is-size-1 has-text-light has-text-weight-bold">
-        RENEKMOON
+        {{ GET_PROFILE_DATA.name }}
       </h1>
     </div>
     <div class="cards">
-      <card />
-      <card />
+      <card
+        :rank="false"
+        label="Highest Mastery Points"
+        :name="GET_HIGHEST_MASTERY_CHAMP.name"
+        :points="GET_HIGHEST_MASTERY_CHAMP.mastery.championPoints"
+        :image="GET_HIGHEST_MASTERY_CHAMP.image.full"
+        :version="GET_HIGHEST_MASTERY_CHAMP.version"
+      />
+      <card
+        label="Current Rank"
+        :rank="true"
+      />
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable import/no-unresolved */
+import { mapGetters } from 'vuex';
 // eslint-disable-next-line import/extensions
 import card from './card';
 
 export default {
   components: { card },
+  computed: {
+    ...mapGetters(['GET_HIGHEST_MASTERY_CHAMP', 'GET_PROFILE_DATA']),
+  },
 };
 </script>
 
 <style lang='scss'>
 .main{
-    padding: 9.5em 0;
+    padding: 11.5em 0;
     .cards{
         display:flex;
         .card{

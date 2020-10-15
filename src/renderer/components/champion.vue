@@ -98,8 +98,13 @@ export default {
   },
   async mounted() {
     this.GET_CHAMPION_SKINS(this.$route.query.name);
+    this.playChooseSound();
   },
   methods: {
+    playChooseSound() {
+      const audio = new Audio(`https://cdn.communitydragon.org/${this.VERSION_STATE}/champion/${this.$route.query.name}/champ-select/sounds/choose`);
+      audio.play();
+    },
     searchSkin() {
       const skins = this.$store.getters.CHAMPION_SKINS_STATE;
       const result = skins.filter(s => s.name.match(new RegExp(this.search, 'gi')));

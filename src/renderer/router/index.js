@@ -30,7 +30,7 @@ export default new Router({
     {
       path: '/ranked',
       name: 'ranked',
-      component: require('@/components/ranked').default,
+      component: require('@/components/background').default,
     },
     {
       path: '*',

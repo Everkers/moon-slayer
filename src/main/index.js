@@ -1,18 +1,22 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable global-require */
+
+import { app, BrowserWindow } from 'electron';
+
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
+  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\');
 }
 
 let mainWindow;
-const winURL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:9080'
-    : `file://${__dirname}/index.html`;
+const winURL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:9080'
+  : `file://${__dirname}/index.html`;
 
 function createWindow() {
   /**
@@ -22,6 +26,12 @@ function createWindow() {
     height: 563,
     useContentSize: true,
     width: 1000,
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      nodeIntegrationInWorker: true,
+    },
   });
 
   mainWindow.loadURL(winURL);
@@ -55,11 +65,9 @@ app.on('activate', () => {
 
 /*
 import { autoUpdater } from 'electron-updater'
-
 autoUpdater.on('update-downloaded', () => {
   autoUpdater.quitAndInstall()
 })
-
 app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })

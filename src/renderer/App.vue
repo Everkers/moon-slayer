@@ -2,7 +2,10 @@
   <div id="app">
     <sideBar />
     <div class="home">
-      <div class="container">
+      <div
+        style="padding:0 1.5em;"
+        class="container"
+      >
         <router-view />
       </div>
       <div class="home__blur" />
@@ -31,15 +34,17 @@ connector.start();
 export default {
   name: 'MoonSlayer2',
   components: { sideBar },
-  mounted() {
+  async mounted() {
     connector.on('connect', (data) => {
       // SET CLIENT DATA TO THE STATE
       this.set_connector_data(data);
     });
-    this.GET_WALLPAPER();
+    await this.SET_PROFILE();
+    await this.GET_USER_DATA();
+    await this.GET_VERSION();
   },
   methods: {
-    ...mapActions(['set_connector_data', 'SET_STATUS', 'GET_WALLPAPER']),
+    ...mapActions(['set_connector_data', 'GET_VERSION', 'SET_PROFILE', 'GET_USER_DATA', 'SET_STATUS']),
   },
 };
 </script>

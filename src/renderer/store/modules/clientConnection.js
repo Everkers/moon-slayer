@@ -6,6 +6,7 @@ import { request } from '../../functions';
 
 const state = {
   status: null,
+  userData: null,
   endpoints: {
     presetIcon: '/lol-summoner/v1/current-summoner/icon/',
     status: '/lol-chat/v1/me/',
@@ -15,9 +16,15 @@ const state = {
     conversations: '/lol-chat/v1/conversations/',
   },
 };
+const getters = {
+  GET_PROFILE_DATA(state) {
+    return state.userData;
+  },
+};
 const actions = {
-  async GET_WALLPAPER({ getters, state }) {
-    await request(getters.GET_REQUEST_DATA, 'GET', '', state.endpoints.profile);
+  async SET_PROFILE({ getters, state }) {
+    const data = await request(getters.GET_REQUEST_DATA, 'GET', '', state.endpoints.status);
+    state.userData = JSON.parse(data.body);
   },
   SET_RANK_STATUS({ getters, state }, input) {
     try {
@@ -51,4 +58,5 @@ export default {
   state,
   mutations,
   actions,
+  getters,
 };

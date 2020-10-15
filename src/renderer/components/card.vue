@@ -1,19 +1,44 @@
 <template>
   <div class="card-container">
-    <h3>Highest Mastery Points</h3>
+    <h3>{{ label }}</h3>
     <div class="card">
       <div class="image-box">
         <img
-          src="https://vignette.wikia.nocookie.net/leagueoflegends/images/9/94/Fiora_OriginalSquare.png/revision/latest?cb=20150725010749"
+          v-if="rank == false"
+
+          :src="`http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${image}`"
+          alt=""
+        >
+        <!-- eslint-disable max-len -->
+        <img
+          v-else
+          :src="require(`../assets/RankedEmblems/${ranks[GET_PROFILE_DATA.lol.rankedLeagueTier]}-${GET_PROFILE_DATA.lol.rankedLeagueTier.toLowerCase()}${getDivision(GET_PROFILE_DATA.lol.rankedLeagueDivision)}.png`)"
           alt=""
         >
       </div>
-      <div class="data">
+      <div
+        v-if="rank == false"
+        class="data"
+      >
         <div class="top">
-          27542 point
+          {{ points }} point
         </div>
         <div class="bottom">
-          250 game
+          {{ name }}
+        </div>
+      </div>
+      <div
+        v-else
+        class="data"
+      >
+        <div
+          style="    text-transform: capitalize;"
+          class="top"
+        >
+          {{ GET_PROFILE_DATA.lol.rankedLeagueTier }} {{ highElo ? '' : GET_PROFILE_DATA.lol.rankedLeagueDivision }}
+        </div>
+        <div class="bottom">
+          {{ GET_PROFILE_DATA.lol.rankedWins }}
         </div>
       </div>
     </div>
@@ -21,8 +46,49 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+  props: ['points', 'label', 'name', 'image', 'rank', 'version'],
+  data: () => ({
+    divisions: {
+      I: 1, II: 2, III: 3, IV: 4,
+    },
+    highElo: false,
+    ranks: {
+      IRON: 'a',
+      BRONZE: 'b',
+      SILVER: 'c',
+      GOLD: 'd',
+      PLATINUM: 'e',
+      DIAMOND: 'f',
+      GRANDMASTER: 'g',
+      MASTER: 'h',
+      CHALLENGER: 'i',
+    },
+  }),
+  computed: {
+    ...mapGetters(['GET_PROFILE_DATA']),
+  },
+  mounted() {
+    this.getDivision(this.GET_PROFILE_DATA.lol.rankedLeagueDivision);
+  },
+  methods: {
+    getDivision(num) {
+      let div = null;
+      if (this.GET_PROFILE_DATA.lol.rankedLeagueTier === 'challenger' || this.GET_PROFILE_DATA.lol.rankedLeagueTier === 'master' || this.GET_PROFILE_DATA.lol.rankedLeagueTier === 'grandmaster') {
+        this.highElo = true;
+        return '';
+      }
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [key, value] of Object.entries(this.divisions)) {
+        // eslint-disable-next-line eqeqeq
+        if (num == key) div = value;
+      }
+      this.highElo = false;
+      return `_${div}`;
+    },
+  },
 };
 </script>
 

@@ -78,9 +78,8 @@ export default {
   components: {
     championCard,
   },
-  mounted() {
-    this.GET_VERSION();
-    this.GET_CHAMPIONS();
+  async beforeCreate() {
+    await this.GET_CHAMPIONS();
   },
   methods: {
     searchChampion() {
@@ -92,7 +91,7 @@ export default {
           this.searchRes.push(this.$store.getters.CHAMPIONS_STATE.data[champ]));
       } else this.searchRes = null;
     },
-    ...mapActions(['GET_VERSION', 'GET_CHAMPIONS']),
+    ...mapActions(['GET_CHAMPIONS']),
   },
 };
 </script>

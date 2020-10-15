@@ -1,5 +1,5 @@
 {
-  "name": "moon-slayer-2",
+  "name": "moon-slayer",
   "version": "0.0.1",
   "author": "Everkers <waelkourich12@gmail.com>",
   "description": "An electron-vue project",
@@ -22,8 +22,8 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "moon-slayer-2",
-    "appId": "com.example.yourapp",
+    "productName": "moon-slayer",
+    "appId": "com.example.moon-slayer",
     "directories": {
       "output": "build"
     },
@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "axios": "^0.18.1",
+    "babel-polyfill": "^6.26.0",
     "buefy": "^0.9.3",
     "eslint-plugin-node": "^11.1.0",
     "lcu-connector": "^2.1.3",
@@ -86,8 +87,8 @@
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
-    "electron": "^2.0.4",
-    "electron-builder": "^20.19.2",
+    "electron": "^10.1.3",
+    "electron-builder": "^22.9.1",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
     "eslint": "^4.19.1",
