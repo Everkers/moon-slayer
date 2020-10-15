@@ -51,11 +51,11 @@ const actions = {
     const { data: response } = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${state.version}/data/en_US/champion/${id}.json`);
     commit('SET_CHAMION_SKINS', response.data[id]);
   },
-  async GET_CHAMPIONS({ commit, state }) {
+  async GET_CHAMPIONS({ state }) {
     // get champions
     const { data: response } = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${state.version}/data/en_US/champion.json`);
     // call mutation with champions to set all champions to state
-    commit('SET_CHAMPIONS ', response);
+    return response;
   },
 
 };
@@ -66,13 +66,15 @@ const mutations = {
     state.highestMastery = champion;
   },
   SET_CHAMPIONS(state, champions) {
+    console.log('test');
     state.champions = champions.data;
   },
   SET_CHAMION_SKINS(state, data) {
     state.currentChampSkins = data.skins;
   },
   SET_VERSION(state, version) {
-    state[version] = version;
+    // eslint-disable-next-line prefer-destructuring
+    state.version = version[0];
   },
 };
 export default {

@@ -26,7 +26,7 @@
       class="champions"
     >
       <router-link
-        v-for="(champion , index) in CHAMPIONS_STATE.data"
+        v-for="(champion , index) in champions.data"
         :key="index"
         :to="{name:'champion' , query:{name:champion.id}}"
       >
@@ -66,6 +66,7 @@ export default {
   data: () => ({
     search: null,
     searchRes: [],
+    champions: null,
   }),
   computed: {
     ...mapGetters(['CHAMPIONS_STATE', 'VERSION_STATE']),
@@ -78,8 +79,10 @@ export default {
   components: {
     championCard,
   },
-  async beforeCreate() {
-    await this.GET_CHAMPIONS();
+  async mounted() {
+    await this.GET_VERSION();
+    const data = await this.GET_CHAMPIONS();
+    this.champions = data;
   },
   methods: {
     searchChampion() {
@@ -91,7 +94,7 @@ export default {
           this.searchRes.push(this.$store.getters.CHAMPIONS_STATE.data[champ]));
       } else this.searchRes = null;
     },
-    ...mapActions(['GET_CHAMPIONS']),
+    ...mapActions(['GET_CHAMPIONS', 'GET_VERSION']),
   },
 };
 </script>
