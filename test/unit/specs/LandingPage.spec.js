@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import Vue from 'vue';
 import LandingPage from '@/components/LandingPage';
 

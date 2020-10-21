@@ -23,6 +23,7 @@ const getters = {
 };
 const actions = {
   async SET_PROFILE({ getters, state }) {
+    console.log('allo');
     const data = await request(getters.GET_REQUEST_DATA, 'GET', '', state.endpoints.status);
     state.userData = JSON.parse(data.body);
   },

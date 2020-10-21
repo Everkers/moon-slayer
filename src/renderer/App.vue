@@ -38,6 +38,7 @@ export default {
     connector.on('connect', (data) => {
       // SET CLIENT DATA TO THE STATE
       this.set_connector_data(data);
+      console.log(data);
     });
     await this.SET_PROFILE();
     await this.GET_USER_DATA();

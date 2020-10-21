@@ -3,6 +3,7 @@
 /* eslint-disable global-require */
 
 import { app, BrowserWindow } from 'electron';
+// eslint-disable-next-line no-unused-vars
 
 
 /**
@@ -26,6 +27,7 @@ function createWindow() {
     height: 563,
     useContentSize: true,
     width: 1000,
+    resizable: false,
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,

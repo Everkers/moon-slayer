@@ -10,7 +10,7 @@ const mutations = {
   SET_CONNECTOR_DATA(state, data) {
     state.data = data;
     state.requestData.url = `${data.protocol}://${data.address}:${data.port}`;
-    state.requestData.auth = `Basic ${btoa(`${data.username}:${data.password}`)}`;
+    state.requestData.auth = `Basic ${Buffer.from(`${data.username}:${data.password}`).toString('base64')}`;
   },
 };
 const getters = {

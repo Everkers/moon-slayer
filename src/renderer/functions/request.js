@@ -3,7 +3,7 @@ const request = require('request');
 
 async function LCUrequest(reqData, method, body, endpoint) {
   // eslint-disable-next-line no-new
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve) => {
     const options = {
       rejectUnauthorized: false,
       headers: {
@@ -16,10 +16,12 @@ async function LCUrequest(reqData, method, body, endpoint) {
     };
 
     request(options, (err, res) => {
-      if (err) reject(new Error('An error occurred while making the requested connection'));
-      else {
-        resolve(res);
-      }
+      resolve(res);
+      console.log(err);
+      // if (err) reject(new Error('An error occurred while making the requested connection'));
+      // else {
+      //   resolve(res);
+      // }
     });
   });
 }

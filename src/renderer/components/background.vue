@@ -86,12 +86,12 @@ export default {
   },
   methods: {
     searchChampion() {
-      const champions = Object.keys(this.$store.getters.CHAMPIONS_STATE.data);
+      const champions = Object.keys(this.champions.data);
       const result = champions.filter(name => name.match(new RegExp(this.search, 'gi')));
       if (result) {
         this.searchRes = [];
         result.forEach(champ =>
-          this.searchRes.push(this.$store.getters.CHAMPIONS_STATE.data[champ]));
+          this.searchRes.push(this.champions.data[champ]));
       } else this.searchRes = null;
     },
     ...mapActions(['GET_CHAMPIONS', 'GET_VERSION']),
