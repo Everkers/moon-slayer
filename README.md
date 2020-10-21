@@ -2,8 +2,12 @@
 This application shows how data sent to the LCU can be modified or read to change visual stuff like, icon, background, hovercard, or read data such as profile data, friends, and more.
 ``My discord Everkers#6416``
 ## Screenshots
-![Background changer](https://i.ibb.co/zFG2v0d/Screenshot-2020-10-05-150720.png)
-![Rank changer](https://i.ibb.co/nr2htY4/Screenshot-2020-10-05-150849.png)
+![Background changer](https://i.ibb.co/L9Mc7rG/1.png)
+![Rank changer](https://i.ibb.co/jwmkzHB/Screenshot-2020-10-20-223149.png)
+![Rank changer](https://i.ibb.co/0fQT1hy/Screenshot-2020-10-20-223234.png)
+![Rank changer](https://i.ibb.co/h1HDhsh/Screenshot-2020-10-20-223303.png)
+![Rank changer](https://i.ibb.co/MfwSyF4/Screenshot-2020-10-20-223328.png)
+
 ## Technologies used
 <table>
   <thead>
