@@ -25,28 +25,9 @@
 // eslint-disable-next-line import/extensions
 import sideBar from './components/sidebar';
 // eslint-disable-next-line import/first
-import { mapActions } from 'vuex';
-
-const LCUConnector = require('lcu-connector');
-
-const connector = new LCUConnector();
-connector.start();
 export default {
   name: 'MoonSlayer2',
   components: { sideBar },
-  async mounted() {
-    connector.on('connect', (data) => {
-      // SET CLIENT DATA TO THE STATE
-      this.set_connector_data(data);
-      console.log(data);
-    });
-    await this.SET_PROFILE();
-    await this.GET_USER_DATA();
-    await this.GET_VERSION();
-  },
-  methods: {
-    ...mapActions(['set_connector_data', 'GET_VERSION', 'SET_PROFILE', 'GET_USER_DATA', 'SET_STATUS']),
-  },
 };
 </script>
 

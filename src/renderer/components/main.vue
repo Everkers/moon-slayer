@@ -27,14 +27,30 @@
 
 <script>
 /* eslint-disable import/no-unresolved */
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 // eslint-disable-next-line import/extensions
 import card from './card';
 
+const LCUConnector = require('lcu-connector');
+
+const connector = new LCUConnector('');
 export default {
   components: { card },
+  async mounted() {
+    connector.on('connect', (data) => {
+      // SET CLIENT DATA TO THE STATE
+      this.set_connector_data(data);
+    });
+    connector.start();
+    await this.SET_PROFILE();
+    await this.GET_USER_DATA();
+    await this.GET_VERSION();
+  },
   computed: {
     ...mapGetters(['GET_HIGHEST_MASTERY_CHAMP', 'GET_PROFILE_DATA']),
+  },
+  methods: {
+    ...mapActions(['set_connector_data', 'GET_VERSION', 'SET_PROFILE', 'GET_USER_DATA', 'SET_STATUS']),
   },
 };
 </script>

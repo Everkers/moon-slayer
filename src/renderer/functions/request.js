@@ -14,7 +14,7 @@ async function LCUrequest(reqData, method, body, endpoint) {
       method,
       url: `${reqData.url}${endpoint}`,
     };
-
+    console.log(options);
     request(options, (err, res) => {
       resolve(res);
       console.log(err);
